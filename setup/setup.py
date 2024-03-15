@@ -1,6 +1,13 @@
 # Path creation
 import os
 import access.details as details
+invalid_symbols = ['/', '\\', '?', '%', '*', ':', '"', '<', '>', '|', '.', '(', ')', '[', ']', '{', '}']
+
+def contains_invalid_symbol(name):
+    for symbol in invalid_symbols:
+        if symbol in name:
+            return True
+    return False
 
 datafolder = "data"
 rootfolder = os.getcwd()
@@ -31,14 +38,24 @@ def runsetup():
                 print("❗ Running This Script For The First Time Sign Up As An Admin")
                 os.chdir(datafolder)
             
-                name = details.name().lower()
+                chksymbol = True
+                while chksymbol:
+                            name = details.name()
+                            if contains_invalid_symbol(name):
+                                print("Your Name Can't Contain Any Symbols TRY Again")
+                            else: chksymbol = False
             
                 if os.path.exists(name) == True:
                     print(f"❌ There was an account named {name} Try with another name.")
                     signupval = False    
                         
                 else:    
-                    uname = details.username().lower()
+                    chksymbol = True
+                    while chksymbol:
+                                    uname = details.username()
+                                    if contains_invalid_symbol(uname):
+                                        print("Your  Username Can't Contain Any Symbols TRY Again")
+                                    else: chksymbol = False
                     password = details.password()
                 
 

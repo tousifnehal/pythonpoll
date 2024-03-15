@@ -1,6 +1,13 @@
 import os 
 import access.details as details
-import access.invalidSym as contains_invalid_symbol
+
+invalid_symbols = ['/', '\\', '?', '%', '*', ':', '"', '<', '>', '|', '.', '(', ')', '[', ']', '{', '}']
+
+def contains_invalid_symbol(name):
+    for symbol in invalid_symbols:
+        if symbol in name:
+            return True
+    return False
 
 datafolder = "data"
 
@@ -29,8 +36,8 @@ def signup():
                     chksymbol = True 
                     while chksymbol:
                         uname = details.username()
-                        if contains_invalid_symbol(name):
-                            print("Your Name Can't Contain Any Symbols TRY Again")
+                        if contains_invalid_symbol(uname):
+                            print("Your Username Can't Contain Any Symbols TRY Again")
                         else: chksymbol = False   
                     
                     password = details.password()

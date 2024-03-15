@@ -14,7 +14,13 @@ import runpoll.rmvpoll as rmvpoll
 import runpoll.editpoll as epoll
 import runpoll.votestatus as vspoll
 
-import access.invalidSym as contains_invalid_symbol
+invalid_symbols = ['/', '\\', '?', '%', '*', ':', '"', '<', '>', '|', '.', '(', ')', '[', ']', '{', '}']
+
+def contains_invalid_symbol(name):
+    for symbol in invalid_symbols:
+        if symbol in name:
+            return True
+    return False
 
 datafolder = "data"
 rootfolder = os.getcwd()
@@ -46,8 +52,8 @@ while valTrue:
         chksymbol = True
         while chksymbol:
                         uname = details.username()
-                        if contains_invalid_symbol(name):
-                            print("Your Name Can't Contain Any Symbols TRY Again")
+                        if contains_invalid_symbol(uname):
+                            print("Your Username Can't Contain Any Symbols TRY Again")
                         else: chksymbol = False   
         os.chdir(datafolder)
         
@@ -108,7 +114,7 @@ allcmd =  ["1 Create Poll [ADMIN]", "2 Check All Polls", "3 Vote A Poll", "4 Rem
 cmdloop = True
 
 while cmdloop:
-    uscmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{allcmd[0]}\n\t{allcmd[1]} \n\t{allcmd[2]} \n\t{allcmd[3]} \n\t{allcmd[4]}\n\t{allcmd[5]}\n\t{allcmd[6]}\n\t{allcmd[7]}\n"))
+    uscmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{allcmd[0]}\n\t{allcmd[1]} \n\t{allcmd[2]} \n\t{allcmd[3]} \n\t{allcmd[4]}\n\t{allcmd[5]}\n\t{allcmd[6]}\n"))
     
     if uscmd == 1:
         if admin:
@@ -135,7 +141,7 @@ while cmdloop:
         else:
             print("You are not an admin")
     elif uscmd == 6:
-        vspoll.chkps
+        vspoll.votestatus()
     elif uscmd == 7:
         print("Exiting Now")
         exit()
