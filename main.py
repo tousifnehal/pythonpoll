@@ -55,6 +55,7 @@ while valTrue:
                         if contains_invalid_symbol(uname):
                             print("Your Username Can't Contain Any Symbols TRY Again")
                         else: chksymbol = False   
+        os.chdir(rootfolder)
         os.chdir(datafolder)
         
         
