@@ -7,6 +7,7 @@ rootfolder = os.getcwd()
 pollfile = "poll"
 pollsl = "pollsl.txt"
 totalvote = "totalvote.txt"
+
 def runsetup():  
     
     if os.path.exists(pollfile) == False:

@@ -1,7 +1,8 @@
 # Importing Modules
 import os
-import access.details as details
 import setup.setup as setup
+
+import access.details as details
 import access.signup as signup
 import access.forgotpass as forgotpass
 import access.forgotuname as forgotuname
@@ -11,6 +12,9 @@ import runpoll.chckpoll as chpoll
 import runpoll.votepoll as vpoll
 import runpoll.rmvpoll as rmvpoll
 import runpoll.editpoll as epoll
+import runpoll.votestatus as vspoll
+
+import access.invalidSym as contains_invalid_symbol
 
 datafolder = "data"
 rootfolder = os.getcwd()
@@ -18,6 +22,7 @@ login = False
 admin = False
 logname = ""
 logusername = ""
+
 
 logincmd = ["1 Login ✅", "2 Sign Up 📜", "3 Forgot Password 🙄", "4 Forgot Username 🙄", "5 Exit ➡"]
 
@@ -32,26 +37,40 @@ while valTrue:
     
     if int(cmd) == 1:
                 
-        name = details.name().lower()
-        uname = details.username().lower()
+        chksymbol = True
+        while chksymbol:
+                    name = details.name()
+                    if contains_invalid_symbol(name):
+                        print("Your Name Can't Contain Any Symbols TRY Again")
+                    else: chksymbol = False
+        chksymbol = True
+        while chksymbol:
+                        uname = details.username()
+                        if contains_invalid_symbol(name):
+                            print("Your Name Can't Contain Any Symbols TRY Again")
+                        else: chksymbol = False   
         os.chdir(datafolder)
         
         
         if os.path.exists(name):
-                    password = details.password()
-                    os.chdir(name)
-                    with open(uname, "r") as x:
-                        match = x.read()
-                    if password in match:
-                        print("✅ Login Successful")
-                        logname = name
-                        logusername = uname
-                        login = True
-                        os.chdir(rootfolder)
-                        valTrue = False
+                    if os.path.exists(uname):
+                        password = details.password()
+                        os.chdir(name)
+                        with open(uname, "r") as x:
+                            match = x.read()
+                        if password in match:
+                            print("✅ Login Successful")
+                            logname = name
+                            logusername = uname
+                            login = True
+                            os.chdir(rootfolder)
+                            valTrue = False
+                        else:
+                            print("❌ Password doesn't matched try again")
+                            os.chdir(rootfolder)
                     else:
-                        print("❌ Password doesn't matched try again")
-                        os.chdir(rootfolder)
+                        print("Username Not Found. Try again")
+                        valTrue = False
                                 
         elif os.path.exists(name) == False:
                     print("❌ No Account was created with this name try again or sign up")
@@ -81,52 +100,45 @@ if login == True:
         admin = True
     else: pass
     
-if admin == True:
-    os.chdir(rootfolder)
-    adcmd = ["1 Create Poll", "2 Check All Polls", "3 Vote A Poll", "4 Remove a poll", "5 Edit a poll", "6 Exit"]
+os.chdir(rootfolder)
 
-    adcmdval = True
+allcmd =  ["1 Create Poll [ADMIN]", "2 Check All Polls", "3 Vote A Poll", "4 Remove a poll [ADMIN]", "5 Edit a poll [ADMIN]","6 Check a poll's vote status", "7 Exit"] 
 
-    while adcmdval:
-        uscmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{adcmd[0]}\n\t{adcmd[1]} \n\t{adcmd[2]} \n\t{adcmd[3]} \n\t{adcmd[4]}\n\t{adcmd[5]}\n"))
-        
-        if uscmd == 1:
+
+cmdloop = True
+
+while cmdloop:
+    uscmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{allcmd[0]}\n\t{allcmd[1]} \n\t{allcmd[2]} \n\t{allcmd[3]} \n\t{allcmd[4]}\n\t{allcmd[5]}\n\t{allcmd[6]}\n\t{allcmd[7]}\n"))
+    
+    if uscmd == 1:
+        if admin:
             cpoll.create()
-            adcmdval = False
-        elif uscmd == 2:
-            chpoll.chkpolls()
-            adcmdval= False
-        elif uscmd == 3:
-            vpoll.votepoll()
-            adcmdval = False
-        elif uscmd == 4:
+            cmdloop = False
+        else:
+            print("You are not an Admin")
+          
+    elif uscmd == 2:
+         chpoll.chkpolls()
+    elif uscmd == 3:
+        vpoll.votepoll()
+        cmdloop = False
+    elif uscmd == 4:
+        if admin:
             rmvpoll.rmvpoll()
-            adcmdval = False
-        elif uscmd == 5:
+            cmdloop = False
+        else:
+            print("You are not an admin")
+    elif uscmd == 5:
+        if admin:
             epoll.editpoll()
-            adcmdval = False  
-        elif uscmd == 6:
-            exit() 
+            cmdloop = False
         else:
-            print("Unknown Command choosen")
-            adcmdval = False 
-else:
-    os.chdir(rootfolder)
-    adcmd = ["1 Check All Polls", "2 Vote A Poll","3 Exit"]
+            print("You are not an admin")
+    elif uscmd == 6:
+        vspoll.chkps
+    elif uscmd == 7:
+        print("Exiting Now")
+        exit()
+    else:
+        print("Unknown Command Choosen")
 
-    adcmdval = True
-
-    while adcmdval:
-        uscmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{adcmd[0]}\n\t{adcmd[1]} \n\t{adcmd[2]}\n"))
-        
-        if uscmd == 1:
-            chpoll.chkpolls()
-            adcmdval= False
-        elif uscmd == 2:
-            vpoll.votepoll()
-            adcmdval = False
-        elif uscmd == 3:
-            exit()
-        else:
-            print("Unknown Command choosen")
-            adcmdval = False 

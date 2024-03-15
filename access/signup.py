@@ -1,22 +1,38 @@
 import os 
 import access.details as details
+import access.invalidSym as contains_invalid_symbol
 
 datafolder = "data"
+
+
+
+
+
 
 def signup():
     signupval = True
     while signupval:
-                
                 os.chdir(datafolder)
-            
-                name = details.name().lower()
-            
+
+                chksymbol = True
+                while chksymbol:
+                    name = details.name()
+                    if contains_invalid_symbol(name):
+                        print("Your Name Can't Contain Any Symbols TRY Again")
+                    else: chksymbol = False
+                        
                 if os.path.exists(name) == True:
                     print(f"❌ There was an account named {name} Try with another name.")
                     signupval = False    
                         
-                else:    
-                    uname = details.username().lower()
+                else:
+                    chksymbol = True 
+                    while chksymbol:
+                        uname = details.username()
+                        if contains_invalid_symbol(name):
+                            print("Your Name Can't Contain Any Symbols TRY Again")
+                        else: chksymbol = False   
+                    
                     password = details.password()
                 
 
@@ -29,5 +45,7 @@ def signup():
                             x.write(f"PASSWORD :- {password} \n")
                         with open(uname, "a") as x:
                             x.write(f"Question:- {secques[0]} \n{secques[1]}\n")
+                        censored = "*" * len(password)
                         print("✅ Sign Up successful")
+                        print(f"Your name : {name}, Username : {uname}, Password : {censored}, Question:- {secques[0]}")
                         signupval = False

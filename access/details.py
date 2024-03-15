@@ -1,7 +1,7 @@
-import os
 
 def name():
-    return input("➡ Your Name : ")
+    name = input("➡ Your Name : ")
+    return name
 
 def username():
     return input("➡ Your Username : ")
