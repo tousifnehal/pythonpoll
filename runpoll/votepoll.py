@@ -68,7 +68,7 @@ def votepoll():
                 print("✅ Voted Successfully")
             
                 
-                chkps.checkpollstauts(selectedFile)
+                chkps.checkpollstauts(selectedFile, totalint)
                 # stars = "*" * random.randint(15,30)
                 # totalvotes = linecache.getline(totalvote, 1)
                 

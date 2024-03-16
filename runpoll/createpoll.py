@@ -5,6 +5,7 @@ rootfolder = os.getcwd()
 pollsl = "pollsl.txt"
 totalvote = "totalvote.txt"
 
+
 def create():
         os.chdir(pollfile)
         

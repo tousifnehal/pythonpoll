@@ -30,7 +30,7 @@ logname = ""
 logusername = ""
 
 
-logincmd = ["1 Login ✅", "2 Sign Up 📜", "3 Forgot Password 🙄", "4 Forgot Username 🙄", "5 Exit ➡"]
+logincmd = ["Login ✅", "Sign Up 📜", "Forgot Password 🙄", "Forgot Username 🙄", "Exit ➡"]
 
 setup.runsetup()
 
@@ -39,7 +39,9 @@ valTrue = True
 
 while valTrue:
     
-    cmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{logincmd[0]}\n\t{logincmd[1]} \n\t{logincmd[2]} \n\t{logincmd[3]} \n\t{logincmd[4]}\n"))
+    for i in range(len(logincmd)):
+        print(f"\t\t{i+1} {logincmd[i]}")
+    cmd = int(input("❗ Type The Number Besides The Command To Execute The Command "))
     
     if int(cmd) == 1:
                 
@@ -77,7 +79,6 @@ while valTrue:
                             os.chdir(rootfolder)
                     else:
                         print("Username Not Found. Try again")
-                        valTrue = False
                                 
         elif os.path.exists(name) == False:
                     print("❌ No Account was created with this name try again or sign up")
@@ -109,18 +110,20 @@ if login == True:
     
 os.chdir(rootfolder)
 
-allcmd =  ["1 Create Poll [ADMIN]", "2 Check All Polls", "3 Vote A Poll", "4 Remove a poll [ADMIN]", "5 Edit a poll [ADMIN]","6 Check a poll's vote status", "7 Exit"] 
+
+allcmd =  ["Create Poll [ADMIN]", "Check All Polls", "Vote A Poll", "Remove a poll [ADMIN]", "Edit a poll [ADMIN]","Check a poll's vote status", "Exit"] 
 
 
 cmdloop = True
 
 while cmdloop:
-    uscmd = int(input(f"❗ Type The Number Besides The Command To Execute The Command \n\t{allcmd[0]}\n\t{allcmd[1]} \n\t{allcmd[2]} \n\t{allcmd[3]} \n\t{allcmd[4]}\n\t{allcmd[5]}\n\t{allcmd[6]}\n"))
-    
+    for i in range(len(allcmd)):
+        print(f"\t\t{i+1} {allcmd[i]}")
+    uscmd = int(input("❗ Type The Number Besides The Command To Execute The Command "))
     if uscmd == 1:
         if admin:
             cpoll.create()
-            cmdloop = False
+            # cmdloop = False
         else:
             print("You are not an Admin")
           
@@ -128,17 +131,17 @@ while cmdloop:
          chpoll.chkpolls()
     elif uscmd == 3:
         vpoll.votepoll()
-        cmdloop = False
+        # cmdloop = False
     elif uscmd == 4:
         if admin:
             rmvpoll.rmvpoll()
-            cmdloop = False
+            # cmdloop = False
         else:
             print("You are not an admin")
     elif uscmd == 5:
         if admin:
             epoll.editpoll()
-            cmdloop = False
+            # cmdloop = False
         else:
             print("You are not an admin")
     elif uscmd == 6:

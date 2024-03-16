@@ -7,6 +7,7 @@ rootfolder = os.getcwd()
 pollsl = "pollsl.txt"
 totalvote = "totalvote.txt"
 
+
 def rmvpoll():
         os.chdir(pollfile)
         allques = os.listdir()

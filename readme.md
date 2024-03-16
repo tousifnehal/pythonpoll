@@ -1,6 +1,6 @@
 # PythonPoll
 
-A Terminal Based Poll Creator And Editor.
+A Terminal Based Poll Creator And Editor
 
 # Usage 
 ```     Download it

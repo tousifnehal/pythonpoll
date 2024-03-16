@@ -11,11 +11,6 @@ def contains_invalid_symbol(name):
 
 datafolder = "data"
 
-
-
-
-
-
 def signup():
     signupval = True
     while signupval:

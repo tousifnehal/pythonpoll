@@ -7,6 +7,7 @@ rootfolder = os.getcwd()
 pollsl = "pollsl.txt"
 totalvote = "totalvote.txt"
 
+
 def lineEdit(file_path, new_content, linenum):
         with open(file_path, 'r') as file:
             lines = file.readlines()

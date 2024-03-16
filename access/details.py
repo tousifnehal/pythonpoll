@@ -9,10 +9,10 @@ def username():
 def password():
    valtrue = True
    while valtrue:
-        password = input("➡ Your Password (Must Contain 8 Characters) : ")
+        password = input("➡ Your Password (Must Contain 6 Characters) : ")
         password = str(password)
-        if len(password) != 8 and len(password) < 8:
-            print("❌ Password Must Contain 8 Characters")
+        if len(password) != 6 and len(password) < 6:
+            print("❌ Password Must Contain 6 Characters")
         else:
             valtrue = False
             return password

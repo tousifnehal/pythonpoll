@@ -6,6 +6,7 @@ rootfolder = os.getcwd()
 pollsl = "pollsl.txt"
 totalvote = "totalvote.txt"
 
+
 def chkpolls():
         os.chdir(pollfile)
         allques = os.listdir()
